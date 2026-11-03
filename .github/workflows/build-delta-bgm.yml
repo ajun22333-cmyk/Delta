@@ -1,6 +1,9 @@
 name: Build Delta BGM IPA
 
 on:
+  push:
+    branches:
+      - feature/ds-bgm-1x
   workflow_dispatch:
 
 permissions:
