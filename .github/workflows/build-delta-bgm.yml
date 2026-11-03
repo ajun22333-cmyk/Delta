@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - feature/ds-bgm-1x
+      - diagnostic/no-ram-mute
   workflow_dispatch:
 
 permissions:
