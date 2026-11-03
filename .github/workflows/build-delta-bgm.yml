@@ -1,4 +1,4 @@
-name: Build Delta BGM IPA
+name: Build Delta BGM IPA # GBA mirror-off diagnostic
 
 on:
   push:
