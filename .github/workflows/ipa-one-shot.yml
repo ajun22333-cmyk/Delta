@@ -1,0 +1,56 @@
+name: One-shot Delta BGM IPA build
+
+on:
+  push:
+    branches:
+      - build/bgm-mute-gate
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: xcode-27
+    steps:
+      - name: Checkout repository and submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Select Xcode
+        run: |
+          xcodebuild -version
+          swift --version
+
+      - name: Install CocoaPods
+        run: |
+          sudo gem install cocoapods
+          pod install
+
+      - name: Build unsigned app archive
+        run: |
+          xcodebuild archive \
+            -workspace Delta.xcworkspace \
+            -scheme Delta \
+            -configuration Release \
+            -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
+            -archivePath "$RUNNER_TEMP/DeltaBGM.xcarchive" \
+            OTHER_CPLUSPLUSFLAGS='$(inherited) -Wno-register' \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO
+
+      - name: Package unsigned IPA
+        run: |
+          mkdir -p "$RUNNER_TEMP/ipa/Payload"
+          cp -R "$RUNNER_TEMP/DeltaBGM.xcarchive/Products/Applications/Delta.app" "$RUNNER_TEMP/ipa/Payload/"
+          cd "$RUNNER_TEMP/ipa"
+          /usr/bin/zip -r "$GITHUB_WORKSPACE/Delta-BGM-unsigned.ipa" Payload
+
+      - name: Upload IPA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Delta-BGM-unsigned-IPA
+          path: Delta-BGM-unsigned.ipa
+          if-no-files-found: error
