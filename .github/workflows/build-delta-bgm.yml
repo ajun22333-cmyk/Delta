@@ -5,6 +5,7 @@ on:
     branches:
       - feature/ds-bgm-1x
       - diagnostic/no-ram-mute
+      - diagnostic/disable-gba-bgm-mirror
   workflow_dispatch:
 
 permissions:
