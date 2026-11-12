@@ -44,7 +44,7 @@ jobs:
             -sdk iphoneos \
             -destination 'generic/platform=iOS' \
             -archivePath "$RUNNER_TEMP/DeltaBGM.xcarchive" \
-            OTHER_CPLUSPLUSFLAGS='$(inherited) -Wno-register' \
+            OTHER_CPLUSPLUSFLAGS='$(inherited) -Wno-register -O3' \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO
 
@@ -62,4 +62,4 @@ jobs:
           path: Delta-BGM-unsigned.ipa
           if-no-files-found: error
 
-# Build with corrected thread-safe DS dropped-frame 3D rendering optimization.
+# Build with thread-safe DS rendering skips and optimized C++ release code.
