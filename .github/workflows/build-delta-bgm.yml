@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - feature/ds-bgm-1x
+      - thermal/ios13-ds-render-skip
   workflow_dispatch:
 
 permissions:
