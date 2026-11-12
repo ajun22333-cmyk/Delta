@@ -56,3 +56,5 @@ jobs:
           name: Delta-BGM-unsigned-IPA
           path: Delta-BGM-unsigned.ipa
           if-no-files-found: error
+
+# Rebuild for the DS dropped-frame 3D render optimization test.
