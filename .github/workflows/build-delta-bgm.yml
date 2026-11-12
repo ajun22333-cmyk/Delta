@@ -45,6 +45,7 @@ jobs:
             -destination 'generic/platform=iOS' \
             -archivePath "$RUNNER_TEMP/DeltaBGM.xcarchive" \
             OTHER_CPLUSPLUSFLAGS='$(inherited) -Wno-register -O3' \
+            LLVM_LTO=YES_THIN \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO
 
@@ -62,4 +63,4 @@ jobs:
           path: Delta-BGM-unsigned.ipa
           if-no-files-found: error
 
-# Build with thread-safe DS rendering skips and optimized C++ release code.
+# Build with thread-safe DS rendering skips, optimized C++ release code, and ThinLTO.
