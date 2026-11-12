@@ -20,6 +20,11 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
+      - name: Checkout thread-safe DS 3D renderer
+        run: |
+          git -C Cores/MelonDSDeltaCore/melonDS fetch origin refs/heads/thermal/skip-3d-thread-safe
+          git -C Cores/MelonDSDeltaCore/melonDS checkout --detach FETCH_HEAD
+
       - name: Select Xcode
         run: |
           xcodebuild -version
@@ -57,4 +62,4 @@ jobs:
           path: Delta-BGM-unsigned.ipa
           if-no-files-found: error
 
-# Rebuild for the DS dropped-frame 3D render optimization test.
+# Build with thread-safe DS dropped-frame 3D rendering optimization.
