@@ -5,6 +5,7 @@ on:
     branches:
       - feature/ds-bgm-1x
       - thermal/ios13-ds-render-skip
+      - experimental/ios-arm64-jit
   workflow_dispatch:
 
 permissions:
@@ -19,6 +20,11 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
+
+      - name: Checkout experimental native ARM64 JIT DS core
+        run: |
+          git -C Cores/MelonDSDeltaCore fetch origin refs/heads/experimental/ios-arm64-jit
+          git -C Cores/MelonDSDeltaCore checkout --detach FETCH_HEAD
 
       - name: Checkout thread-safe DS 3D renderer
         run: |
