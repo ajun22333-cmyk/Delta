@@ -6,6 +6,7 @@ on:
       - feature/ds-bgm-1x
       - thermal/ios13-ds-render-skip
       - thermal/skip-inactive-audio-channels
+      - thermal/cpu-profile-test
   workflow_dispatch:
 
 permissions:
@@ -21,9 +22,11 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
-      - name: Checkout DS renderer with pending-job synchronization fix
+      - name: Checkout profiling bridge and DS core
         run: |
-          git -C Cores/MelonDSDeltaCore/melonDS fetch origin refs/heads/thermal/skip-inactive-audio-channels
+          git -C Cores/MelonDSDeltaCore fetch origin refs/heads/thermal/cpu-profile-test
+          git -C Cores/MelonDSDeltaCore checkout --detach FETCH_HEAD
+          git -C Cores/MelonDSDeltaCore/melonDS fetch origin refs/heads/thermal/cpu-profile-test
           git -C Cores/MelonDSDeltaCore/melonDS checkout --detach FETCH_HEAD
 
       - name: Select Xcode
