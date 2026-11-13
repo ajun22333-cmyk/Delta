@@ -67,4 +67,4 @@ jobs:
           path: Delta-BGM-unsigned.ipa
           if-no-files-found: error
 
-# Build with synchronous iOS soft rendering, skipped-frame optimizations, optimized C++ release code, and ThinLTO.
+# Diagnostic build: sampled ARM9/ARM7/GPU3D timing with synchronous iOS soft rendering and ThinLTO.
