@@ -70,3 +70,5 @@ jobs:
 # Diagnostic build: sampled ARM9/ARM7/GPU3D timing with synchronous iOS soft rendering and ThinLTO.
 
 # Diagnostic build: serialized DS save-state access, FIFO/3D bounds checks, profiler, and thermal optimizations.
+
+# Diagnostic build: per-section savestate read bounds to reject cross-section deserialization.
