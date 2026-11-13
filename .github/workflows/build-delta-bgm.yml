@@ -6,6 +6,7 @@ on:
       - feature/ds-bgm-1x
       - thermal/ios13-ds-render-skip
       - thermal/skip-inactive-audio-channels
+      - thermal/max-pokemon-heat
   workflow_dispatch:
 
 permissions:
