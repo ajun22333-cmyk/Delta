@@ -68,3 +68,5 @@ jobs:
           if-no-files-found: error
 
 # Diagnostic build: sampled ARM9/ARM7/GPU3D timing with synchronous iOS soft rendering and ThinLTO.
+
+# Diagnostic build: ARM9 fetch, instruction execution, and post-processing breakdown.
