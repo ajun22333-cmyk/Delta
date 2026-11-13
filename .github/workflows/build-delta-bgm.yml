@@ -64,4 +64,4 @@ jobs:
           path: Delta-BGM-unsigned.ipa
           if-no-files-found: error
 
-# Build with pending-job and scanline-signal synchronization, optimized C++ release code, and ThinLTO.
+# Build with synchronous iOS soft rendering, skipped-frame optimizations, optimized C++ release code, and ThinLTO.
