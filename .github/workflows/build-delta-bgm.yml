@@ -5,6 +5,7 @@ on:
     branches:
       - feature/ds-bgm-1x
       - thermal/ios13-ds-render-skip
+      - thermal/skip-inactive-audio-channels
   workflow_dispatch:
 
 permissions:
@@ -20,9 +21,9 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
-      - name: Checkout thread-safe DS 3D renderer
+      - name: Checkout DS renderer and inactive-audio optimization
         run: |
-          git -C Cores/MelonDSDeltaCore/melonDS fetch origin refs/heads/thermal/skip-3d-thread-safe
+          git -C Cores/MelonDSDeltaCore/melonDS fetch origin refs/heads/thermal/skip-inactive-audio-channels
           git -C Cores/MelonDSDeltaCore/melonDS checkout --detach FETCH_HEAD
 
       - name: Select Xcode
