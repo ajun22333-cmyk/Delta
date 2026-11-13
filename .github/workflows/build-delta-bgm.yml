@@ -21,7 +21,7 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
-      - name: Checkout DS renderer and inactive-audio optimization
+      - name: Checkout DS renderer with pending-job synchronization fix
         run: |
           git -C Cores/MelonDSDeltaCore/melonDS fetch origin refs/heads/thermal/skip-inactive-audio-channels
           git -C Cores/MelonDSDeltaCore/melonDS checkout --detach FETCH_HEAD
@@ -64,4 +64,4 @@ jobs:
           path: Delta-BGM-unsigned.ipa
           if-no-files-found: error
 
-# Build with thread-safe DS rendering skips, optimized C++ release code, and ThinLTO.
+# Build with tracked DS render-job synchronization, optimized C++ release code, and ThinLTO.
