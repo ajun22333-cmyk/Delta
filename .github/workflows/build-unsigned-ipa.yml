@@ -1,0 +1,61 @@
+name: Build unsigned Delta IPA
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/gbc-bgm-1x
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - name: Check out Delta and submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: false
+          fetch-depth: 0
+
+      - name: Configure HTTPS for public Git submodules
+        run: |
+          git config --global url."https://github.com/".insteadOf git@github.com:
+          git config --global --add url."https://github.com/".insteadOf ssh://git@github.com/
+          git submodule sync --recursive
+          git submodule update --init --recursive
+
+      - name: Install CocoaPods
+        run: |
+          sudo gem install cocoapods --no-document
+          pod install
+
+      - name: Build for iPhone
+        run: |
+          xcodebuild \
+            -workspace Delta.xcworkspace \
+            -scheme Delta \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            build
+
+      - name: Package unsigned IPA
+        run: |
+          APP_PATH="build/Build/Products/Release-iphoneos/Delta.app"
+          test -d "$APP_PATH"
+          mkdir -p Payload
+          ditto "$APP_PATH" "Payload/Delta.app"
+          /usr/bin/zip -qry Delta-unsigned.ipa Payload
+
+      - name: Upload IPA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Delta-unsigned-IPA
+          path: Delta-unsigned.ipa
+          if-no-files-found: error
+          retention-days: 7
