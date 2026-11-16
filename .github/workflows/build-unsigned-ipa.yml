@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-15-intel
     steps:
       - name: Check out Delta and submodules
         uses: actions/checkout@v4
