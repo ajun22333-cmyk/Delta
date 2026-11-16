@@ -12,7 +12,8 @@
 	url = https://github.com/ajun22333-cmyk/GBADeltaCore-ff-bgm1x.git
 [submodule "Cores/GBCDeltaCore"]
 	path = Cores/GBCDeltaCore
-	url = git@github.com:rileytestut/GBCDeltaCore.git
+	url = https://github.com/ajun22333-cmyk/GBCDeltaCore.git
+	branch = feature/gbc-bgm-1x
 [submodule "External/Harmony"]
 	path = External/Harmony
 	url = https://github.com/rileytestut/Harmony.git
